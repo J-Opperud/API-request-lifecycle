@@ -1,45 +1,97 @@
 
-## Overview
-A Python diagnostic tool that sends HTTP requests to the JSONPlaceholder
- REST API and reports the response status, status category, and a brief description.
 
-Assignment Objective
+## Objective
 
-The goal of this assignment is to practice interpreting HTTP status codes and understanding how REST APIs respond to successful requests, client errors, and other responses.
+Understand the structure of an HTTP request and response by inspecting:
 
+HTTP method
+URL
+Request headers
+Request body
+Response status code and reason
+Response headers
+Response body
+Request elapsed time
+API Transactions
+Request	Method	Endpoint	Body
+Get user	GET	/users/1	None
+Create post	POST	/posts	JSON
+Update post title	PATCH	/posts/1	JSON
+Request Anatomy
+SCRIPT
+    │
+    │  Request
+    │  ├── Method
+    │  ├── URL
+    │  ├── Headers
+    │  └── Body
+    ▼
+JSONPlaceholder
+    │
+    │  Response
+    │  ├── Status code + reason
+    │  ├── Headers
+    │  └── Body
+    ▼
+SCRIPT
 
+Project Structure
+request-anatomy/
+├── request_anatomy.py
+└── README.md
 
-## Technologies
+## Requirements
 Python 3
 requests
-REST API
-JSONPlaceholder
-Running the Project
 
-Install the requests library:
+Install the dependency:
 
 pip install requests
 
-
-## Run the diagnostic script:
-
-python status-code-detective.py
-
-Status Code Categories
-
-The script groups HTTP responses into broad categories:
-
-2xx → Success
-4xx → Client Error
-5xx → Server Error
+## Run
+python request_anatomy.py
 
 
-Responses outside these ranges are categorized as Other.
+The script prints each transaction with clear separators so the request and response anatomy can be compared.
 
-## Project Structure
-API-diagnostic/
-├── status-code-detective.py
-├── README.md
-└── docs/
-    └── status-detective.md
+## Design
+
+The request inspection and output formatting are handled through reusable functions rather than duplicating the same logic for each API call.
+
+make request
+     ↓
+inspect request
+     ↓
+inspect response
+     ↓
+print anatomy
+
+
+This keeps the implementation DRY while giving all three transactions a consistent output format.
+
+
+Although this exercise focuses on successful transactions, real-world API clients also need to account for:
+
+Network and connection failures
+Request timeouts
+HTTP error responses (4xx and 5xx)
+Redirects
+Empty response bodies
+Missing response headers
+Invalid JSON responses
+Authentication and sensitive headers
+Large response bodies
+Retries and rate limiting
+
+These are documented as considerations rather than over-engineering this small exercise.
+
+Key Takeaway
+
+The purpose of this lab is not just learning how to call an API with Python.
+
+It is learning to look at an API transaction and ask:
+
+What did my application send, what did the server return, and what does that tell me?
+
+That mental model is useful when building, testing, and debugging REST APIs.
 
