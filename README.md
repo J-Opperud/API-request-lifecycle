@@ -85,13 +85,6 @@ Retries and rate limiting
 
 These are documented as considerations rather than over-engineering this small exercise.
 
-Key Takeaway
-
-The purpose of this lab is not just learning how to call an API with Python.
-
-It is learning to look at an API transaction and ask:
-
-What did my application send, what did the server return, and what does that tell me?
 
 That mental model is useful when building, testing, and debugging REST APIs.
 
